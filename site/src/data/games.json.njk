@@ -1,0 +1,17 @@
+---
+permalink: /games.json
+eleventyExcludeFromCollections: true
+---
+{% set nunjucksAutoescape = false %}
+[
+{% for game in collections.games %}
+  {
+    "id": "{{ game.url | slug }}",
+    "title": {{ game.data.title | jsonify | safe }},
+    "releaseYear": {{ game.data.releaseYear | safe }},
+    "genre": {{ game.data.genre | jsonify | safe }},
+    "studio": {{ game.data.studio | jsonify | safe }},
+    "status": {{ game.data.status | jsonify | safe }}
+  }{% if not loop.last %},{% endif %}
+{% endfor %}
+]

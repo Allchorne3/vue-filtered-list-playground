@@ -11,8 +11,16 @@ module.exports = function(eleventyConfig) {
 		return collection.getFilteredByTag("post").filter(item => item.data.featured);
 	});
 
+	eleventyConfig.addCollection("games", collection => {
+		return collection.getFilteredByTag("game");
+	});
+
 	// Expose Nunjucks filters
 	eleventyConfig.addFilter("prettyDate", prettyDate);
+
+	eleventyConfig.addFilter("jsonify", function(value) {
+		return JSON.stringify(value);
+	});
 
 	// Automatically open up the browser on script runs
 	eleventyConfig.setBrowserSyncConfig({
@@ -44,7 +52,7 @@ module.exports = function(eleventyConfig) {
 
 		dir: {
 			input: "site/src",
-			output: "public",
+			output: "public/",
 			// In relation to input
 			layouts: "../templates",
 			// In relation to input
